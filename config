@@ -1,0 +1,42 @@
+Host Bastion
+   User ubuntu
+   HostName 91.106.195.180
+   IdentityFile ~/.ssh/id_rsa
+   UserKnownHostsFile /dev/null
+   StrictHostKeyChecking no
+   PasswordAuthentication no
+
+Host HAproxy
+   User ubuntu
+   HostName 10.1.0.109
+   IdentityFile ~/.ssh/id_rsa
+   StrictHostKeyChecking no
+   PasswordAuthentication no
+   ProxyJump Bastion
+
+Host devA
+   User ubuntu
+   HostName 10.1.0.157
+   IdentityFile ~/.ssh/id_rsa
+   UserKnownHostsFile=/dev/null
+   StrictHostKeyChecking no
+   PasswordAuthentication no
+   ProxyJump Bastion
+
+Host devB
+   User ubuntu
+   HostName 10.1.0.79
+   IdentityFile ~/.ssh/id_rsa
+   UserKnownHostsFile=/dev/null
+   StrictHostKeyChecking no
+   PasswordAuthentication no
+   ProxyJump Bastion
+
+Host devC
+   User ubuntu
+   HostName 10.1.0.117
+   IdentityFile ~/.ssh/id_rsa
+   UserKnownHostsFile=/dev/null
+   StrictHostKeyChecking no
+   PasswordAuthentication no
+   ProxyJump Bastion
