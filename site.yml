@@ -1,0 +1,68 @@
+---
+- hosts: all
+  become: true
+  become_method: sudo
+  gather_facts: yes
+  tasks:
+        - name: "Update Cache"
+          apt:
+              update_cache: yes
+
+
+- name: Configure Backend Web Servers
+  hosts: webservers
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install pip3
+      apt:
+        name: python3-pip
+        state: latest
+        update_cache: true
+
+    - name: Installing Flask
+      pip:
+         executable: pip3
+         name: flask
+         state: latest
+
+    - name: Serve Flask App - pre-fork worker model
+      apt:
+        name: gunicorn
+
+    - name: Copy Python file to app.py
+      copy:
+         src: /$PWD/app1.py
+         dest: /home/ubuntu/app1.py
+         owner: ubuntu
+         mode: '0644'
+
+    - name: Run Flask app
+      shell: gunicorn -w 2 -D -b 0.0.0.0:8000 app1:app
+
+- hosts: HAproxy
+  become: yes
+  tasks:
+          - name: Update cache
+            apt:
+                   update_cache: yes
+
+          - name: "Installing haproxy"
+            package:
+                    name: haproxy
+                    state: present
+
+
+          - name: "Copying configuration file"
+            template:
+                    src: /$PWD/haproxy.cfg.j2
+                    dest: /etc/haproxy/haproxy.cfg
+
+
+          - name: "restarting haproxy services"
+            service:
+                    name: "haproxy"
+                    state: restarted
