@@ -1,6 +1,6 @@
 Host Bastion
    User ubuntu
-   HostName 91.106.195.180
+   HostName <Enter Public IPv4 address of server 'Bastion'>
    IdentityFile ~/.ssh/id_rsa
    UserKnownHostsFile /dev/null
    StrictHostKeyChecking no
@@ -8,7 +8,7 @@ Host Bastion
 
 Host HAproxy
    User ubuntu
-   HostName 10.1.0.109
+   HostName <Enter Private IPv4 address of server 'HAproxy'>
    IdentityFile ~/.ssh/id_rsa
    StrictHostKeyChecking no
    PasswordAuthentication no
@@ -16,7 +16,7 @@ Host HAproxy
 
 Host devA
    User ubuntu
-   HostName 10.1.0.157
+   HostName <Enter Private IPv4 address of server 'devA'>
    IdentityFile ~/.ssh/id_rsa
    UserKnownHostsFile=/dev/null
    StrictHostKeyChecking no
@@ -25,7 +25,7 @@ Host devA
 
 Host devB
    User ubuntu
-   HostName 10.1.0.79
+   HostName <Enter Private IPv4 address of server 'devB'>
    IdentityFile ~/.ssh/id_rsa
    UserKnownHostsFile=/dev/null
    StrictHostKeyChecking no
@@ -34,7 +34,7 @@ Host devB
 
 Host devC
    User ubuntu
-   HostName 10.1.0.117
+   HostName <Enter Private IPv4 address of server 'devC'>
    IdentityFile ~/.ssh/id_rsa
    UserKnownHostsFile=/dev/null
    StrictHostKeyChecking no
